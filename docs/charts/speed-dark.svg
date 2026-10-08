@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="316" viewBox="0 0 760 316" role="img" aria-label="Ready in seconds">
+<rect width="760" height="316" rx="16" fill="#191a1c"/>
+<text x="24" y="40" font-family="IBM Plex Sans, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="17" font-weight="600" fill="#ecebe7">Ready in seconds</text>
+<text x="24" y="64" font-family="IBM Plex Sans, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="13" fill="#b0afa9">Seconds, measured on an M3 MacBook Air (8 GB)</text>
+<text x="24" y="101.0" font-family="IBM Plex Sans, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="14" font-weight="400" fill="#ecebe7">Open the page</text>
+<text x="24" y="117.0" font-family="IBM Plex Sans, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="11.5" fill="#8a8982">npx folio-search, installed</text>
+<path d="M274,92 H341.28 Q345.28,92 345.28,96 V108 Q345.28,112 341.28,112 H274 Z" fill="#747cf0"/>
+<text x="355.28" y="107.0" font-family="JetBrains Mono, SF Mono, Menlo, monospace" font-size="13" font-weight="400" fill="#ecebe7">0.9 s</text>
+<text x="24" y="145.0" font-family="IBM Plex Sans, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="14" font-weight="400" fill="#ecebe7">Search by name, first run</text>
+<text x="24" y="161.0" font-family="IBM Plex Sans, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="11.5" fill="#8a8982">4 408 files walked and indexed</text>
+<path d="M274,136 H365.03999999999996 Q369.03999999999996,136 369.03999999999996,140 V152 Q369.03999999999996,156 365.03999999999996,156 H274 Z" fill="#747cf0"/>
+<text x="379.03999999999996" y="151.0" font-family="JetBrains Mono, SF Mono, Menlo, monospace" font-size="13" font-weight="400" fill="#ecebe7">1.2 s</text>
+<text x="24" y="189.0" font-family="IBM Plex Sans, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="14" font-weight="400" fill="#ecebe7">A changed file is found</text>
+<text x="24" y="205.0" font-family="IBM Plex Sans, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="11.5" fill="#8a8982">FSEvents, debounced</text>
+<path d="M274,180 H468.0 Q472.0,180 472.0,184 V196 Q472.0,200 468.0,200 H274 Z" fill="#747cf0"/>
+<text x="482.0" y="195.0" font-family="JetBrains Mono, SF Mono, Menlo, monospace" font-size="13" font-weight="400" fill="#ecebe7">2.5 s</text>
+<text x="24" y="233.0" font-family="IBM Plex Sans, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="14" font-weight="400" fill="#ecebe7">Install from scratch</text>
+<text x="24" y="249.0" font-family="IBM Plex Sans, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="11.5" fill="#8a8982">npx, empty cache, Python included</text>
+<path d="M274,224 H602.64 Q606.64,224 606.64,228 V240 Q606.64,244 602.64,244 H274 Z" fill="#747cf0"/>
+<text x="616.64" y="239.0" font-family="JetBrains Mono, SF Mono, Menlo, monospace" font-size="13" font-weight="400" fill="#ecebe7">4.2 s</text>
+<line x1="274" y1="84" x2="274" y2="252" stroke="#2a2b2e" stroke-width="1"/>
+<text x="24" y="294" font-family="IBM Plex Sans, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="11.5" fill="#8a8982">Full first index, content and vectors: 6 min 4 s at low priority. Search works from the first second.</text>
+</svg>

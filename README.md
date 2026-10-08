@@ -3,38 +3,126 @@
 <img src="brand/folio-wordmark-on-light.svg#gh-light-mode-only" alt="folio" height="56">
 <img src="brand/folio-wordmark-on-dark.svg#gh-dark-mode-only" alt="folio" height="56">
 
-**Local file search for macOS, in plain language.** Type what you remember
-about a file — a topic, a client, a folder, a month — and folio finds it by
-name, folder and content, in French or English.
+### Find a file by describing what you remember about it.
 
 [![CI](https://github.com/ethanbch/folio/actions/workflows/ci.yml/badge.svg)](https://github.com/ethanbch/folio/actions/workflows/ci.yml)
+[![npm](https://img.shields.io/npm/v/folio-search?color=4f56d6)](https://www.npmjs.com/package/folio-search)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-[![100% local](https://img.shields.io/badge/data-100%25%20local-brightgreen)](#100-local)
+[![100% local](https://img.shields.io/badge/data-100%25%20local-brightgreen)](#nothing-leaves-your-mac)
 
 </div>
 
 ---
 
+You rarely remember a file's name. You remember that it was a quote for the
+kitchen, that it mentioned solid oak, that it arrived last week as a PDF.
+**folio searches the way you remember**: by name, by folder and by what is
+inside the file, in French and English, on your Mac and nowhere else.
+
 ```sh
 npx folio-search
 ```
 
-The first run installs folio's Python environment with
-[uv](https://github.com/astral-sh/uv) (≈ 140 MB on disk; 2.3 s on a fast
-connection), starts a local server and opens the page. uv is downloaded if
-it is missing, and installs Python 3.13 if needed. Click **Index my files**.
-After that, `npx folio-search` (or `folio` once installed with
-`npm i -g folio-search`) opens the page in about a second.
+Installs in about 4 seconds, then opens in under 1. One click indexes your Documents,
+Desktop, Downloads and iCloud Drive.
 
-![folio: a query, its filter chips, and results with excerpts](docs/screenshot.png)
+![folio: a query in plain language, with excerpts and the reason each file matched](docs/screenshot.png)
+
+<table>
+<tr>
+<td align="center" width="25%"><h3>84 %</h3>of searches put the right file<br>in the top 3</td>
+<td align="center" width="25%"><h3>12 ms</h3>for the first results,<br>as you type</td>
+<td align="center" width="25%"><h3>1.2 s</h3>until you can search<br>4 408 files by name</td>
+<td align="center" width="25%"><h3>100 % local</h3>no account, no telemetry,<br>files never uploaded</td>
+</tr>
+</table>
+
+## Search the way you remember
+
+Type what comes to mind. folio reads it as you would:
+
+| You type | folio understands |
+| --- | --- |
+| `le devis de la cuisine en chêne` | a quote, about a kitchen, that mentions oak |
+| `le pdf de la semaine dernière` | PDF files, modified or opened since Monday of last week |
+| `slides du cours sur la VaR` | presentations, from a course, about Value at Risk |
+| `notes réunion budget mars 2025` | meeting notes on the budget, from March 2025 |
+
+Dates and file types in the query become filters you can remove with one
+click. The rest is matched three ways at once: by **keywords** in names,
+folders and content, by **meaning** with a multilingual language model, and by
+**what you opened before**. A cross-encoder then re-reads the top 10 to put the
+right file first.
+
+## Each stage is measured
+
+Every part of the ranking was added, tuned or rejected against 61 real queries
+with known answers. Ideas that did not improve the numbers were left out: hard
+date filters and split keyword lists ranked worse, and an embedding model 2.4
+times larger ranked no better.
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/charts/quality-dark.svg">
+  <img alt="Mean reciprocal rank by stage: keywords in names 0.661, plus content 0.687, plus meaning 0.724, plus dates and types 0.736, plus ranking signals 0.755, folio 0.1.0 with the cross-encoder 0.783 and 84 % of queries with the expected file in the top 3." src="docs/charts/quality-light.svg" width="760">
+</picture>
+
+| Stage | MRR | First result | Top 3 | Top 10 |
+| --- | --- | --- | --- | --- |
+| Keywords in names and folders | 0.661 | 59 % | 70 % | 80 % |
+| + file content | 0.687 | 57 % | 79 % | 87 % |
+| + meaning (embeddings, fusion) | 0.724 | 62 % | 79 % | 87 % |
+| + dates and types | 0.736 | 66 % | 77 % | 87 % |
+| + ranking signals | 0.755 | 67 % | 82 % | 89 % |
+| **folio 0.1.0** (+ cross-encoder) | **0.783** | **70 %** | **84 %** | **89 %** |
+
+The full method, every variant tested and the queries folio still misses are in
+[docs/EVAL.md](docs/EVAL.md). Run the same measurement on your own files with
+`folio eval`.
+
+## Fast at every step
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/charts/speed-dark.svg">
+  <img alt="Seconds: open the page 0.9, search by name on a first run 1.2, a changed file is found 2.5, install from scratch 4.2. Full first index 6 min 4 s at low priority." src="docs/charts/speed-light.svg" width="760">
+</picture>
+
+- **Searches answer in 12 ms** (p95) as you type. The re-ranked list replaces
+  them about 60 ms later, so the page never waits for the slow step.
+- **The first index never blocks you.** Names are searchable after one second;
+  content is read in the background, at low priority, while the page shows
+  what is happening and how long is left.
+- **Battery comes first.** Indexing pauses below 20 % and resumes within
+  3 seconds of plugging in, or right away if you choose to continue.
+- **It stays light**: about 575 MB of memory with both models loaded, and
+  about 460 MB on disk, models included.
+
+## Nothing leaves your Mac
+
+- The index lives in `~/Library/Application Support/folio/`. The server
+  listens on `127.0.0.1` only, behind a per-session token.
+- The only download is the two language models, once (≈ 240 MB from
+  Hugging Face), and `uv` if it is missing. After that, folio works offline.
+- No account, no telemetry. Your searches are logged on your Mac, to rank the
+  files you open higher next time, and deleted with the index.
+- Files that usually hold secrets (SSH keys, `*.pem`, `kaggle.json`,
+  keychains) are never indexed, so they never appear in an excerpt.
+
+## Made for the files you actually have
+
+- **PDF, Word, PowerPoint, Excel, CSV, Markdown, code, notebooks, e-mails,
+  EPUB.** A file that fails to parse is still found by name; one bad PDF
+  never blocks indexing.
+- **iCloud files that are not downloaded** are found by name and folder,
+  without downloading them.
+- **Copies and archives rank lower.** `devis (1).pdf` and the `old/` folder
+  give way to the original.
+- **Changes are picked up as they happen**, through FSEvents, and the index
+  catches up on what changed while folio was off.
 
 ## Table of contents
 
-- [What it does](#what-it-does)
-- [100% local](#100-local)
 - [Keyboard](#keyboard)
 - [How search works](#how-search-works)
-- [Measured quality and speed](#measured-quality-and-speed)
 - [Command line](#command-line)
 - [Start at login and Dock app](#start-at-login-and-dock-app)
 - [Permissions](#permissions)
@@ -43,31 +131,6 @@ After that, `npx folio-search` (or `folio` once installed with
 - [Project structure](#project-structure)
 - [Development](#development)
 - [License](#license)
-
-## What it does
-
-- Searches file names, folder names and the text inside files: PDF, Word,
-  PowerPoint, Excel and CSV, Markdown, text, code, notebooks, e-mails, EPUB,
-  OpenDocument.
-- Matches meaning, not only the words you type, with a multilingual
-  embedding model running on your Mac.
-- Reads dates and file types in the query, in French and English, and shows
-  them as filters you can remove: "le pdf du devis de la semaine dernière"
-  searches "devis" among PDFs modified since last Monday.
-- Learns from what you open: a file you picked for a query ranks higher the
-  next time.
-- Updates the index within seconds of a change, at low priority, and pauses on
-  battery below 20 %.
-
-## 100% local
-
-- The index lives in `~/Library/Application Support/folio/`.
-- The server listens on `127.0.0.1` only.
-- The only network access is the one-time download of the language model
-  (two models, ≈ 240 MB from Hugging Face) and, if `uv` is missing, of `uv` itself. There is
-  no telemetry.
-- Searches and clicks are logged in the same local folder, to improve ranking.
-  Nothing leaves your Mac.
 
 ## Keyboard
 
@@ -112,26 +175,6 @@ Each query goes through these steps, with no generative model involved:
 
 Every weight above was set by measurement, not by intuition: see
 [docs/EVAL.md](docs/EVAL.md).
-
-## Measured quality and speed
-
-On an M3 MacBook Air (8 GB), with 4 408 files indexed (950 with readable
-content, the rest stored in iCloud and indexed by name), over 61 queries
-written the way one remembers a file (reranker on):
-
-| | Value |
-| --- | --- |
-| Expected file in the top 3 | 84 % of queries |
-| Expected file first | 70 % |
-| Mean reciprocal rank | 0.783 |
-| Query time, fast list (p95) | 12 ms |
-| Query time, re-ranked list (p95) | 72 ms |
-| Server memory, warm | ≈ 575 MB |
-| First index, 4 408 files | 6 min 4 s (names searchable after 1.2 s) |
-| Change picked up | 2.3 to 2.7 s |
-| Install with `npx`, empty cache | 2.3 s |
-
-The full comparison of variants is in [docs/EVAL.md](docs/EVAL.md).
 
 ## Command line
 
