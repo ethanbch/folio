@@ -1,0 +1,10 @@
+{
+  "name": "folio",
+  "short_name": "folio",
+  "description": "Local file search",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#111213",
+  "theme_color": "#111213",
+  "icons": [{ "src": "/assets/icon.svg", "sizes": "any", "type": "image/svg+xml" }]
+}

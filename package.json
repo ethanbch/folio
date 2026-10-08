@@ -1,0 +1,39 @@
+{
+  "name": "folio-search",
+  "version": "0.1.0",
+  "license": "MIT",
+  "description": "Local natural-language file search for macOS. Names, folders and content, in French and English.",
+  "keywords": [
+    "search",
+    "files",
+    "macos",
+    "local",
+    "semantic-search",
+    "finder",
+    "spotlight"
+  ],
+  "homepage": "https://github.com/ethanbch/folio#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ethanbch/folio.git"
+  },
+  "bin": {
+    "folio": "bin/folio.mjs"
+  },
+  "files": [
+    "bin/",
+    "src/folio/",
+    "!src/folio/**/__pycache__",
+    "pyproject.toml",
+    "uv.lock",
+    ".python-version",
+    "README.md",
+    "LICENSE"
+  ],
+  "os": [
+    "darwin"
+  ],
+  "engines": {
+    "node": ">=18"
+  }
+}

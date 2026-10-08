@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="folio-token" content="__FOLIO_TOKEN__">
+  <meta name="color-scheme" content="light dark">
+  <title>folio</title>
+  <link rel="icon" href="/assets/icon.svg" type="image/svg+xml">
+  <link rel="manifest" href="/assets/manifest.webmanifest">
+  <script src="/assets/theme.js"></script>
+  <link rel="stylesheet" href="/assets/readout.css">
+  <link rel="stylesheet" href="/assets/readout-components.css">
+  <link rel="stylesheet" href="/assets/folio.css">
+</head>
+<body class="ro">
+  <div class="page">
+    <header class="top">
+      <span class="ro-wordmark top__logo">folio</span>
+      <div class="top__right">
+        <button class="ro-chip index-chip" id="index-chip" type="button" hidden>
+          <span class="ro-chip__dot" id="index-dot"></span><span id="index-label"></span>
+        </button>
+        <button class="ro-icon-button" id="theme" type="button" aria-label="Changer de thème" data-i18n-aria="theme">
+          <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M8 2a6 6 0 0 1 0 12z" fill="currentColor"/></svg>
+        </button>
+      </div>
+    </header>
+
+    <!-- First run: no index yet -->
+    <section class="first" id="onboard" hidden>
+      <div class="first__intro">
+        <p class="ro-eyebrow" data-i18n="firstEyebrow">Premier lancement</p>
+        <h1 class="first__title" data-i18n="firstTitle">Retrouve un fichier en décrivant ce dont tu te souviens.</h1>
+        <p class="first__lead" data-i18n="firstLead">folio cherche dans les noms, les dossiers et le contenu de tes fichiers, en français et en anglais. L'index reste sur ce Mac : rien n'est envoyé ailleurs.</p>
+        <div class="first__start">
+          <button class="ro-button ro-button--primary first__cta-button" id="start-index" type="button">
+            <span id="start-label" data-i18n="startIndex">Indexer mes fichiers</span><span class="first__arrow" aria-hidden="true">→</span>
+          </button>
+          <p class="first__start-meta ro-mono" id="first-start-meta"></p>
+        </div>
+        <div class="first__demo" aria-hidden="true">
+          <div class="query query--demo">
+            <svg class="query__icon" width="18" height="18" viewBox="0 0 18 18"><circle cx="7.5" cy="7.5" r="5.5" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="m11.8 11.8 4.2 4.2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+            <span class="first__typed" data-i18n="firstExample">le devis de la cuisine en chêne</span><span class="first__caret"></span>
+          </div>
+          <ul class="first__examples">
+            <li data-i18n="firstEx1">slides du cours sur la VaR</li>
+            <li data-i18n="firstEx2">pdf de la semaine dernière</li>
+            <li data-i18n="firstEx3">notes de la réunion budget</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="first__grid">
+        <section class="ro-card first__card">
+          <header class="ro-card__header"><h2 class="ro-eyebrow" data-i18n="firstScope">À indexer</h2></header>
+          <p class="ro-hero__value first__total" id="first-total">—</p>
+          <p class="ro-hero__hint" id="first-hint"></p>
+          <ul class="ro-bars first__bars" id="first-roots"></ul>
+          <dl class="ro-kpis first__kpis" id="first-kpis"></dl>
+        </section>
+
+        <section class="ro-card first__card">
+          <header class="ro-card__header">
+            <h2 class="ro-eyebrow" id="first-steps-title" data-i18n="firstNext">Ce qui va se passer</h2>
+            <button class="ro-icon-button" id="first-stop" type="button" aria-label="Arrêter l'indexation" title="Arrêter l'indexation" data-i18n-aria="stopIndex" hidden><svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><rect x="3" y="3" width="8" height="8" rx="1.5" fill="currentColor"/></svg></button>
+          </header>
+          <ol class="steps" id="onboard-steps"></ol>
+          <p class="first__caption" id="first-caption" data-i18n="firstCaption">L'indexation tourne en priorité basse et se met en pause sur batterie faible.</p>
+        </section>
+      </div>
+    </section>
+
+    <!-- Search -->
+    <main class="search" id="search" hidden>
+      <div class="query">
+        <svg class="query__icon" width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><circle cx="7.5" cy="7.5" r="5.5" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="m11.8 11.8 4.2 4.2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+        <input id="q" class="query__input" type="search" autocomplete="off" spellcheck="false" autofocus
+               placeholder="Cherche un fichier : « devis cuisine pdf de mars », « notes réunion budget »…" data-i18n-placeholder="placeholder"
+               aria-label="Recherche" aria-controls="results" aria-autocomplete="list">
+        <span class="query__ms ro-mono" id="ms" aria-live="off"></span>
+      </div>
+
+      <div class="filters">
+        <div class="chips" id="chips"></div>
+        <div class="filters__right">
+          <div class="ro-segmented" role="group" aria-label="Type" id="kind-filter">
+            <button type="button" aria-pressed="true" data-kind="" data-i18n="all">Tout</button>
+            <button type="button" aria-pressed="false" data-kind="pdf">PDF</button>
+            <button type="button" aria-pressed="false" data-kind="document" data-i18n="docs">Docs</button>
+            <button type="button" aria-pressed="false" data-kind="spreadsheet" data-i18n="sheets">Tableurs</button>
+            <button type="button" aria-pressed="false" data-kind="presentation" data-i18n="slides">Présentations</button>
+            <button type="button" aria-pressed="false" data-kind="image" data-i18n="images">Images</button>
+          </div>
+          <div class="ro-segmented" role="group" aria-label="Période" id="days-filter">
+            <button type="button" aria-pressed="true" data-days="" data-i18n="allDates">Toutes</button>
+            <button type="button" aria-pressed="false" data-days="7">7 j</button>
+            <button type="button" aria-pressed="false" data-days="30">30 j</button>
+            <button type="button" aria-pressed="false" data-days="365">1 an</button>
+          </div>
+        </div>
+      </div>
+
+      <section class="ro-card banner" id="banner" hidden aria-live="polite">
+        <header class="banner__head">
+          <h2 class="ro-eyebrow" id="banner-title"></h2>
+          <span class="banner__pct ro-mono" id="banner-pct"></span>
+          <button class="ro-icon-button banner__stop" id="banner-stop" type="button" aria-label="Arrêter l'indexation" title="Arrêter l'indexation" data-i18n-aria="stopIndex" hidden><svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><rect x="3" y="3" width="8" height="8" rx="1.5" fill="currentColor"/></svg></button>
+          <button class="banner__close" id="banner-close" type="button" aria-label="Fermer" data-i18n-aria="close" hidden>×</button>
+        </header>
+        <div class="ro-meter" id="banner-meter" role="meter" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-label="Progression de l'indexation"></div>
+        <p class="banner__text" id="banner-text"></p>
+        <div class="banner__meta ro-mono"><span id="banner-count"></span><span id="banner-eta"></span></div>
+        <div class="banner__current ro-mono" id="banner-current"></div>
+        <div class="banner__actions" id="banner-actions" hidden>
+          <button class="ro-button ro-button--primary" id="banner-resume" type="button" data-i18n="resumeIndex">Reprendre l'indexation</button>
+          <button class="ro-button ro-button--primary" id="banner-battery" type="button" data-i18n="continueBattery" hidden>Continuer sur batterie</button>
+        </div>
+      </section>
+
+      <ol class="results" id="results" role="listbox" aria-label="Résultats"></ol>
+      <p class="empty" id="empty" hidden></p>
+
+      <footer class="keys" id="keys">
+        <span><kbd>↑</kbd><kbd>↓</kbd> <span data-i18n="kNav">choisir</span></span>
+        <span><kbd>↵</kbd> <span data-i18n="kOpen">ouvrir</span></span>
+        <span><kbd>⌘</kbd><kbd>↵</kbd> <span data-i18n="kReveal">afficher dans le Finder</span></span>
+        <span><kbd>⌘</kbd><kbd>C</kbd> <span data-i18n="kCopy">copier le chemin</span></span>
+        <span><kbd>espace</kbd> <span data-i18n="kPreview">aperçu</span></span>
+        <span><kbd>échap</kbd> <span data-i18n="kClear">effacer</span></span>
+      </footer>
+    </main>
+  </div>
+
+  <!-- Status dialog -->
+  <div class="ro-scrim" id="status-scrim" hidden>
+    <div class="ro-dialog status" role="dialog" aria-modal="true" aria-labelledby="status-title">
+      <div class="ro-dialog__head">
+        <h2 class="ro-dialog__title" id="status-title" data-i18n="statusTitle">Index</h2>
+        <button class="ro-icon-button" id="status-close" type="button" aria-label="Fermer" data-i18n-aria="close">
+          <svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><path d="M2 2l10 10M12 2 2 12" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+        </button>
+      </div>
+      <div class="ro-dialog__body" id="status-body"></div>
+    </div>
+  </div>
+
+  <!-- Continue on battery -->
+  <div class="ro-scrim" id="battery-scrim" hidden>
+    <div class="ro-dialog battery" role="dialog" aria-modal="true" aria-labelledby="battery-title">
+      <div class="ro-dialog__head">
+        <h2 class="ro-dialog__title" id="battery-title" data-i18n="batteryTitle">Indexer sur batterie</h2>
+        <button class="ro-icon-button" id="battery-close" type="button" aria-label="Fermer" data-i18n-aria="close">
+          <svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><path d="M2 2l10 10M12 2 2 12" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+        </button>
+      </div>
+      <div class="ro-dialog__body">
+        <p class="status__text" id="battery-why"></p>
+        <dl class="ro-facts battery__facts" id="battery-facts"></dl>
+        <p class="status__hint" id="battery-scope"></p>
+        <div class="ro-actions">
+          <button class="ro-button" id="battery-cancel" type="button" data-i18n="cancel">Annuler</button>
+          <button class="ro-button ro-button--primary" id="battery-confirm" type="button" data-i18n="continueBattery">Continuer sur batterie</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+  <script src="/assets/app.js"></script>
+</body>
+</html>

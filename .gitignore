@@ -1,0 +1,10 @@
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.ruff_cache/
+dist/
+node_modules/
+.DS_Store
+# Evaluation queries name real files: they stay in the data folder, never here.
+queries*.jsonl

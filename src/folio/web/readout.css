@@ -1,0 +1,133 @@
+/* Généré par scripts/build-tokens.py depuis tokens/readout.json. Ne pas éditer. */
+
+/* Clair par défaut ; le sombre suit le système, et data-theme force l'un ou l'autre. */
+:root {
+  color-scheme: light;
+  --page: #f6f6f4;
+  --surface: #ffffff;
+  --surface-sunken: #f1f1ee;
+  --surface-hover: #ececea;
+  --ink: #1b1c1d;
+  --ink-secondary: #504f4a;
+  --ink-muted: #6e6d67;
+  --border: #e6e5e1;
+  --border-strong: #d6d5d0;
+  --accent: #4f56d6;
+  --accent-hover: #3f45bd;
+  --accent-wash: #ecedfb;
+  --on-accent: #ffffff;
+  --grid: #ecebe7;
+  --axis: #d6d5d0;
+  --series-1: #5b62e0;
+  --series-2: #1baf7a;
+  --series-3: #2a78d6;
+  --series-4: #e87ba4;
+  --series-5: #8a8a93;
+  --ramp-1: #eef0ff;
+  --ramp-2: #d9dcff;
+  --ramp-3: #b9beff;
+  --ramp-4: #959cf7;
+  --ramp-5: #7178e8;
+  --ramp-6: #535ad0;
+  --ramp-7: #3a3fa6;
+  --status-good: #0a7d0a;
+  --status-warning: #946500;
+  --status-serious: #b5521f;
+  --status-critical: #c53030;
+  --critical-hover: #a82828;
+  --on-critical: #ffffff;
+  --shadow-overlay: 0 12px 32px -8px rgba(27, 28, 29, 0.18);
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --radius-xs: 2px;
+  --radius-sm: 6px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --page-max-width: 1140px;
+  --meter-segments: 20;
+  --font-sans: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --page: #111213;
+    --surface: #191a1c;
+    --surface-sunken: #202124;
+    --surface-hover: #25262a;
+    --ink: #ecebe7;
+    --ink-secondary: #b0afa9;
+    --ink-muted: #8a8982;
+    --border: #2a2b2e;
+    --border-strong: #3a3b3f;
+    --accent: #8b93ff;
+    --accent-hover: #a3a9ff;
+    --accent-wash: #23254a;
+    --on-accent: #111213;
+    --grid: #26272a;
+    --axis: #3a3b3f;
+    --series-1: #747cf0;
+    --series-2: #199e70;
+    --series-3: #3987e5;
+    --series-4: #d55181;
+    --series-5: #7d7d86;
+    --ramp-1: #1f2142;
+    --ramp-2: #2b2e63;
+    --ramp-3: #3a3e85;
+    --ramp-4: #4d52a8;
+    --ramp-5: #6268c9;
+    --ramp-6: #7d83e6;
+    --ramp-7: #a0a5ff;
+    --status-good: #3fb950;
+    --status-warning: #e5b04a;
+    --status-serious: #ec835a;
+    --status-critical: #e5675a;
+    --critical-hover: #ef8a7f;
+    --on-critical: #111213;
+    --shadow-overlay: 0 12px 32px -8px rgba(0, 0, 0, 0.6);
+  }
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --page: #111213;
+  --surface: #191a1c;
+  --surface-sunken: #202124;
+  --surface-hover: #25262a;
+  --ink: #ecebe7;
+  --ink-secondary: #b0afa9;
+  --ink-muted: #8a8982;
+  --border: #2a2b2e;
+  --border-strong: #3a3b3f;
+  --accent: #8b93ff;
+  --accent-hover: #a3a9ff;
+  --accent-wash: #23254a;
+  --on-accent: #111213;
+  --grid: #26272a;
+  --axis: #3a3b3f;
+  --series-1: #747cf0;
+  --series-2: #199e70;
+  --series-3: #3987e5;
+  --series-4: #d55181;
+  --series-5: #7d7d86;
+  --ramp-1: #1f2142;
+  --ramp-2: #2b2e63;
+  --ramp-3: #3a3e85;
+  --ramp-4: #4d52a8;
+  --ramp-5: #6268c9;
+  --ramp-6: #7d83e6;
+  --ramp-7: #a0a5ff;
+  --status-good: #3fb950;
+  --status-warning: #e5b04a;
+  --status-serious: #ec835a;
+  --status-critical: #e5675a;
+  --critical-hover: #ef8a7f;
+  --on-critical: #111213;
+  --shadow-overlay: 0 12px 32px -8px rgba(0, 0, 0, 0.6);
+}
